@@ -17,6 +17,32 @@
         },
 
         {
+            "name": "Enoch Project",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sandbox-Enoch",
+            "program": "${workspaceFolder}/sandbox/Enoch/bin/Debug/net8.0/Enoch.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/sandbox/Enoch",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "stopAtEntry": false
+        },
+        
+        {
+            "name": "Omen Project",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-sandbox-Omen",
+            "program": "${workspaceFolder}/sandbox/Omen/bin/Debug/net8.0/Omen.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/sandbox/Omen",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "stopAtEntry": false
+        },
+
+        {
             "name": "C# Prep 1",
             "type": "coreclr",
             "request": "launch",
