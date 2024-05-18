@@ -17,3 +17,11 @@ or  == ||
 not == !
 
 if: if 
+
+An object is an instance of a class. An object is like a class except that it has data in it.
+
+ ---------------
+|   Journal     | - The idea of an item
+ ---------------
+|Working Journal| - The actual item
+ ---------------
