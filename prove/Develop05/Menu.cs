@@ -58,6 +58,9 @@ public class Menu
 
     public void SaveToFile(string filename)
     {
+        Console.Clear();
+        Console.WriteLine("Saving Goals");
+        Thread.Sleep(1000);
         try
         {
             using (StreamWriter writer = new StreamWriter(filename))
@@ -74,10 +77,14 @@ public class Menu
         {
             Console.WriteLine($"An error occurred while saving the goals: {ex.Message}");
         }
+        ShowSpinnerAnimation(5);
     }
 
     public void LoadFromFile(string filename)
     {
+        Console.Clear();
+        Console.WriteLine("Loading Goals");
+        Thread.Sleep(1000);
         try
         {
             if (!File.Exists(filename))
@@ -110,6 +117,7 @@ public class Menu
         {
             Console.WriteLine($"An unexpected error occurred: {ex.Message}");
         }
+        ShowSpinnerAnimation(5);
     }
 
     public void RecordGoalEvent()
