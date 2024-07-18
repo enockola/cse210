@@ -1,30 +1,44 @@
-public abstract class Task
-{
-    protected string _taskDescription;
-    protected string _taskPriority;
-    protected string _taskDate;
-
-    public Task(string taskDescription, string taskPriority, string taskDate)
+    public abstract class Task
     {
-        _taskDescription = taskDescription;
-        _taskPriority = taskPriority;
-        _taskDate = taskDate;
-    }
+        protected string _taskDescription;
+        protected string _taskPriority;
+        protected string _taskDate;
 
-    public string TaskDescription
-    {
-        get { return _taskDescription; }
-        set { _taskDescription = value; }
-    }
+        protected Task() { }
 
-    public string TaskPriority
-    {
-        get { return _taskPriority; }
-        set { _taskPriority = value; }
-    }
+        protected Task(string taskDescription, string taskPriority, string taskDate)
+        {
+            _taskDescription = taskDescription;
+            _taskPriority = taskPriority;
+            _taskDate = taskDate;
+        }
 
-    public override string ToString()
-    {
-        return $"{_taskDescription} (Priority: {_taskPriority}, Date: {_taskDate})";
+        public string GetTaskDescription()
+        {
+            return _taskDescription;
+        }
+
+        public string GetTaskPriority()
+        {
+            return _taskPriority;
+        }
+
+        public string GetTaskDate()
+        {
+            return _taskDate;
+        }
+
+        public abstract void InputDetails();
+        public abstract string GetExtraInfo();
+        
+        public void UpdateDetails(string newDescription, string newPriority)
+        {
+            _taskDescription = newDescription;
+            _taskPriority = newPriority;
+        }
+
+        public override string ToString()
+        {
+            return $"{_taskDescription}, Priority: {_taskPriority}, Date: {_taskDate}";
+        }
     }
-}

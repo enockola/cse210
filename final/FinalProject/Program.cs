@@ -1,24 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-
 class Program
 {
     static void Main(string[] args)
     {
-        Tasklist taskList = new Tasklist();
-        CompletedTaskList completedTaskList = new CompletedTaskList();
-        TaskOption taskOption = new TaskOption(taskList, completedTaskList);
+        TaskManager taskManager = new TaskManager();
+        CompletedTask completedTask = new CompletedTask();
+        FileManager fileManager = new FileManager();
 
+        List<Task> tasks = fileManager.LoadTasks();
+        if (tasks != null)
+        {
+            taskManager.SetTasks(tasks);
+        }
+
+        Console.Clear();
         Console.WriteLine("Welcome to Task Manager!");
         Console.WriteLine("Manage your tasks well before it's due.\n");
+        WaitForUserInput();
         Thread.Sleep(1000);
         bool running = true;
 
         while (running)
         {
             Console.Clear();
-            Console.WriteLine($"You have {taskList.GetTaskCount()} tasks incompleted.");
+            Console.WriteLine($"You have {taskManager.GetTaskCount()} tasks incomplete.");
             Console.WriteLine("\nMenu Options:");
             Console.WriteLine("   1. Add a new task");
             Console.WriteLine("   2. Remove a task");
@@ -26,7 +30,7 @@ class Program
             Console.WriteLine("   4. Complete a task");
             Console.WriteLine("   5. View all tasks");
             Console.WriteLine("   6. View completed tasks");
-            Console.WriteLine("   7. Quit");
+            Console.WriteLine("   7. Save and Exit");
             Console.Write("Select a choice from the menu: ");
 
             string choice = Console.ReadLine();
@@ -34,24 +38,27 @@ class Program
             switch (choice)
             {
                 case "1":
-                    taskOption.AddNewTask();
+                    taskManager.AddNewTask();
                     break;
                 case "2":
-                    taskOption.RemoveTask();
+                    taskManager.RemoveTask();
                     break;
                 case "3":
-                    taskOption.UpdateTask();
+                    taskManager.UpdateTask();
                     break;
                 case "4":
-                    taskOption.CompleteTask();
+                    taskManager.CompleteTask(completedTask);
                     break;
                 case "5":
-                    taskList.PrintAllTasks();
+                    taskManager.PrintAllTasks();
+                    WaitForUserInput();
                     break;
                 case "6":
-                    completedTaskList.PrintAllCompletedTasks();
+                    completedTask.PrintAllCompletedTasks();
+                    WaitForUserInput();
                     break;
                 case "7":
+                    fileManager.SaveTasks(taskManager.GetAllTasks(), completedTask.GetAllCompletedTasks());
                     running = false;
                     break;
                 default:
@@ -59,5 +66,11 @@ class Program
                     break;
             }
         }
+    }
+
+    static void WaitForUserInput()
+    {
+        Console.Write("\nPress any key to continue...");
+        Console.ReadKey();
     }
 }
